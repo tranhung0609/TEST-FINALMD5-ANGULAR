@@ -1,0 +1,120 @@
+<div class="container">
+
+  <form class="box" [formGroup]="formTour" (ngSubmit)="createTours()" id="form-create" hidden>
+    <table>
+      <tr>
+        <th colspan="2"><h1 id="header">Create new tour</h1></th>
+      </tr>
+      <tr>
+        <th><label for="title" class="form-label">Address:</label></th>
+        <td><input class="form-control" id="title" formControlName="title" type="text"></td>
+        <td>
+          <div *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+            <div *ngIf="title?.errors?.['required']">
+              <p style="color: red">Not blank</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="price" class="form-label">Price:</label></th>
+        <td><input class="form-control" id="price" formControlName="price" type="text"></td>
+        <td>
+          <div *ngIf="price?.invalid && (price?.dirty || price?.touched)">
+            <div *ngIf="price?.errors?.['required']">
+              <p style="color: red">Not blank</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="description" class="form-label">Description:</label></th>
+        <td><input class="form-control" id="description" formControlName="description" type="text">
+        <td>
+          <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+            <div *ngIf="description?.errors?.['required']">
+              <p style="color: red">Not blank</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" id="center">
+          <button type="submit" class="btn btn-primary" id="submit">Create</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <form class="box" [formGroup]="formTour" (ngSubmit)="updateTours()" id="form-update" hidden>
+    <table>
+      <tr>
+        <th colspan="2"><h1>Update Tours</h1></th>
+      </tr>
+      <tr>
+        <th><label for="title1" class="form-label">Address:</label></th>
+        <td><input class="form-control" id="title1" formControlName="title" type="text"></td>
+        <td>
+          <div *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+            <div *ngIf="title?.errors?.['required']">
+              <p style="color: red">Not blank</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="price1" class="form-label">Price:</label></th>
+        <td><input class="form-control" id="price1" formControlName="price" type="text"></td>
+        <td>
+          <div *ngIf="price?.invalid && (price?.dirty || price?.touched)">
+            <div *ngIf="price?.errors?.['required']">
+              <p style="color: red">Not blank</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="description1" class="form-label">Description:</label></th>
+        <td><input class="form-control" id="description1" formControlName="description" type="text">
+        <td>
+          <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+            <div *ngIf="description?.errors?.['required']">
+              <p style="color: red">Not blank</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" id="center1">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <br>
+
+  <h5 style="margin-left: 160px">Có {{tours.length}} tours</h5>
+  <h1 (click)="getAllTours()">List Tours</h1>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Address</th>
+      <th>Price</th>
+      <th colspan="2">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tour of tours; index as i">
+      <td> {{i + 1}} </td>
+      <td>
+        <a [routerLink]="['/detail', tour.id]"><ins>{{tour.title}}</ins></a>
+      </td>
+      <td>{{tour.price}}</td>
+      <td (click)="editTours(tour.id)"><i class="fa-solid fa-pen-to-square"></i></td>
+      <td (click)="deleteTours(tour.id, tour.title)"><i class="fa-solid fa-trash-can"></i></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<router-outlet></router-outlet>
